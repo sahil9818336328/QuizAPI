@@ -1,8 +1,8 @@
-import React from "react";
-import Form from "./Form";
-import Loading from "./Loading";
-import Modal from "./Modal";
-import { useGlobalContext } from "./context";
+import React from 'react'
+import Form from './Form'
+import Loading from './Loading'
+import Modal from './Modal'
+import { useGlobalContext } from './context'
 
 const App = () => {
   const {
@@ -13,47 +13,47 @@ const App = () => {
     questions,
     checkAnswer,
     nextQuestion,
-  } = useGlobalContext();
+  } = useGlobalContext()
 
   if (isLoading) {
-    return <Loading />;
+    return <Loading />
   }
   if (isWaiting) {
-    return <Form />;
+    return <Form />
   }
 
-  const { question, correct_answer, incorrect_answers } = questions[index];
-  let totalAnswers = [...incorrect_answers, correct_answer];
+  const { question, correct_answer, incorrect_answers } = questions[index]
+  let totalAnswers = [...incorrect_answers, correct_answer]
   // SHUFFLING THE ANSWERS BEFORE RENDERING
-  totalAnswers.sort(() => 0.5 - Math.random());
+  totalAnswers.sort(() => 0.5 - Math.random())
   return (
     <main>
       <Modal />
-      <section className="quiz">
-        <p className="correct-answers">
+      <section className='quiz'>
+        <p className='correct-answers'>
           {`correct answers : ${isCorrect}/${index}`}
         </p>
-        <article className="container">
+        <article className='container'>
           <h2>{question}</h2>
-          <div className="btn-container">
+          <div className='btn-container'>
             {totalAnswers.map((answer, i) => {
               return (
                 <button
                   key={i}
-                  className="answer-btn"
+                  className='answer-btn'
                   dangerouslySetInnerHTML={{ __html: answer }}
                   onClick={() => checkAnswer(correct_answer === answer)}
                 />
-              );
+              )
             })}
           </div>
         </article>
-        <button className="next-question" onClick={nextQuestion}>
+        <button className='next-question' onClick={nextQuestion}>
           next
         </button>
       </section>
     </main>
-  );
-};
+  )
+}
 
-export default App;
+export default App
